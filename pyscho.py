@@ -62,12 +62,16 @@ c_beat = 0
 
 seed(args.seed)
 
+print ("Seed:", args.seed)
+print ("Scale:", args.scale)
+print ("Bars:", args.bars)
+print ("-----------------")
 notes = get_notes(start,scales[args.scale])
-print (notes)
+#print (notes)
 while (c_beat < (args.bars * 4)):
 	value = randint(0, len(notes)-1) 
 	duration = randrange(25, 425, 25) / 100	
-	print(notes[value], duration)
+	#print(notes[value], duration)
 	pitch = notes[value]
 	time = c_beat
 	mf.addNote(track, channel, pitch, time, duration, volume)
@@ -76,3 +80,6 @@ while (c_beat < (args.bars * 4)):
 
 with open(args.outputfile, 'wb') as outf:
     mf.writeFile(outf)
+
+print ("Melody saved on", args.outputfile)
+
