@@ -1,7 +1,7 @@
 # pyscho
 pySchö - Python Schönberg: Algorithmic music composition
 
-`
+```
 usage: pyscho.py [-h] [--scale SCALE] [--start START] [--bars BARS] seed outputfile
 
 positional arguments:
@@ -15,4 +15,4 @@ optional arguments:
   --start START  first note (default: 60 - C4)
   --bars BARS    number of bars (default: 10)
 
-`
+```
