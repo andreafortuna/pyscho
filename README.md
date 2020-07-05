@@ -1,2 +1,2 @@
 # pyscho
-pySchö - Python Schönberg: Algorithm music composition 
+pySchö - Python Schönberg: Algorithmic music composition 
