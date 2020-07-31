@@ -46,6 +46,7 @@ parser.add_argument('outputfile',  help='output file name')
 parser.add_argument('--scale', dest='scale', action='store',default='major', help='musical scale: major, minor, dorian, phrygian, minor_pentatonic, major_pentatonic, harmonic_minor, mixolydian, minor_blues, locrian, lydian (default: major)')
 parser.add_argument('--start', dest='start', action='store', type=int, default=60, help='first note (default: 60 - C4)')
 parser.add_argument('--bars', dest='bars', action='store',type=int, default=10, help='number of bars (default: 10)')
+parser.add_argument('--min-duration', dest='minduration', action='store',type=int, default=16, help='min duration of a single note 1/X (default: 1/16)')
 args = parser.parse_args()
 
 start = args.start #60
@@ -62,15 +63,19 @@ c_beat = 0
 
 seed(args.seed)
 
+mindur = 4/int(args.minduration)*100
+
 print ("Seed:", args.seed)
 print ("Scale:", args.scale)
 print ("Bars:", args.bars)
+print ("Min duration:", mindur)
 print ("-----------------")
 notes = get_notes(start,scales[args.scale])
 #print (notes)
 while (c_beat < (args.bars * 4)):
 	value = randint(0, len(notes)-1) 
-	duration = randrange(25, 425, 25) / 100	
+	#duration = randrange(25, 425, 25) / 100
+	duration = randrange(mindur, 425, 25) / 100	
 	#print(notes[value], duration)
 	pitch = notes[value]
 	time = c_beat
