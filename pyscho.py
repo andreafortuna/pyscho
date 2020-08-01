@@ -47,6 +47,7 @@ parser.add_argument('--scale', dest='scale', action='store',default='major', hel
 parser.add_argument('--start', dest='start', action='store', type=int, default=60, help='first note (default: 60 - C4)')
 parser.add_argument('--bars', dest='bars', action='store',type=int, default=10, help='number of bars (default: 10)')
 parser.add_argument('--min-duration', dest='minduration', action='store',type=int, default=16, help='min duration of a single note 1/X (default: 1/16)')
+parser.add_argument('--max-duration', dest='maxduration', action='store',type=int, default=16, help='max duration of a single note 1/X (default: 1/1)')
 args = parser.parse_args()
 
 start = args.start #60
@@ -64,18 +65,26 @@ c_beat = 0
 seed(args.seed)
 
 mindur = 4/int(args.minduration)*100
+maxdur = 4/int(args.maxduration)*100
+
 
 print ("Seed:", args.seed)
 print ("Scale:", args.scale)
 print ("Bars:", args.bars)
 print ("Min duration:", mindur)
+print ("Max duration:", maxdur)
 print ("-----------------")
 notes = get_notes(start,scales[args.scale])
 #print (notes)
 while (c_beat < (args.bars * 4)):
 	value = randint(0, len(notes)-1) 
 	#duration = randrange(25, 425, 25) / 100
-	duration = randrange(mindur, 425, 25) / 100	
+	#duration = randrange(mindur, 425, 25) / 100	
+	if (mindur == maxdur):
+		duration = mindur/100
+	else:	
+		duration = randrange(mindur, maxdur, 25) / 100	
+	print ("Duration", duration) 	
 	#print(notes[value], duration)
 	pitch = notes[value]
 	time = c_beat
