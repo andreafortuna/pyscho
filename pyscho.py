@@ -48,6 +48,7 @@ parser.add_argument('--start', dest='start', action='store', type=int, default=6
 parser.add_argument('--bars', dest='bars', action='store',type=int, default=10, help='number of bars (default: 10)')
 parser.add_argument('--min-duration', dest='minduration', action='store',type=int, default=16, help='min duration of a single note 1/X (default: 1/16)')
 parser.add_argument('--max-duration', dest='maxduration', action='store',type=int, default=16, help='max duration of a single note 1/X (default: 1/1)')
+parser.add_argument('-v', '--verbose', action='store_true')
 args = parser.parse_args()
 
 start = args.start #60
@@ -84,10 +85,12 @@ while (c_beat < (args.bars * 4)):
 		duration = mindur/100
 	else:	
 		duration = randrange(mindur, maxdur, 25) / 100	
-	print ("Duration", duration) 	
+
 	#print(notes[value], duration)
 	pitch = notes[value]
 	time = c_beat
+	if (args.verbose):
+		print ("Pitch:", pitch, "Duration:", duration)
 	mf.addNote(track, channel, pitch, time, duration, volume)
 	c_beat += duration
 
